@@ -1,5 +1,6 @@
   celery :
-
+  install redis
+celery -A celery_ worker --loglevel=INFO
 
 
 

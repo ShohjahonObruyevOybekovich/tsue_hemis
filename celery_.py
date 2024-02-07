@@ -11,7 +11,7 @@ def send_email(users: list):
         smtp_server = "smtp.gmail.com"
         sender_email = "shohjahonobruyev3@gmail.com"
         receiver_email = user
-        password = "igvtnsygfdnceluf"
+        password = "nldqpjycwnsolife"
         message = """\
         Subject: Bu birinchi task.
 
