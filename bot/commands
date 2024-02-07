@@ -1,0 +1,7 @@
+  363  docker images
+  364  docker build -t echo_bot1 .
+  365  docker login
+  366  docker images
+  367  docker tag echo_bot1:latest shokhmee/echo_bot
+  368  docker push shokhmee/echo_bot
+  369  history
