@@ -1,0 +1,13 @@
+filial_txt = 'Filial 📍'
+start_txt = 'Start ✅'
+admin_txt = "Admin 👨‍💻"
+women_txt = "Woman 🧍‍♀️"
+men_txt = "Men 🧍‍♂️"
+news = 'News Post'
+back_women_txt = "🔙  Back"
+back_men_txt = "🔙   Back"
+back_txt = "🔙 Back"
+oy1 = '1-oy'
+oy2 = '2-oy'
+oy3 = '3-oy'
+oy4 = '4-oy'
