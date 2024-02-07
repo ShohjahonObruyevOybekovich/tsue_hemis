@@ -4,7 +4,7 @@ version: '3.11'
 services:
   bot:
     build: .
-    #image shokhmee/exam_shohjahon
+    #image shokhmee/exam_p18_shohjahon
     restart: always
     container_name: exam_shohjahon
     environment:
