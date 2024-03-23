@@ -1,13 +1,13 @@
 from datetime import datetime
 
-import pytz
-from sqlalchemy import BIGINT, TIMESTAMP, func, Column
-from sqlalchemy.orm import Mapped, mapped_column, declarative_base
+from sqlalchemy import Column, BIGINT, String, DateTime
+from sqlalchemy.orm import declarative_base
 
 Base = declarative_base()
 
 class User(Base):
     __tablename__ = "users"
-    id : Mapped[int] = mapped_column(primary_key=True,autoincrement=True)
-    chat_id: Mapped[int] = mapped_column(__type_pos=BIGINT)
-
+    id = Column(BIGINT, primary_key=True)  # Primary key column
+    chat_id = Column(BIGINT)
+    user_messages = Column(String)
+    received_date = Column(DateTime, default=datetime.now)  # Use default=datetime.now

@@ -8,8 +8,8 @@ services:
     restart: always
     container_name: exam_shohjahon
     environment:
-      BOT_TOKEN: 6739521733:AAFg6sWfzb61eBs5db8zcu2hr-DFJCmcgtE
-      DB_NAME: postgres
+      BOT_TOKEN: 6984156715:AAHG0DFt-HzYVaqQqBSU5kmgeLz0aQ_byf0
+      DB_NAME: course
       DB_PASSWORD: 1
       DB_HOST: pg
       DB_USER: postgres
