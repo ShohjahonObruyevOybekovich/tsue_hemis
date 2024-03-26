@@ -4,13 +4,13 @@ from aiogram.filters import CommandStart
 from aiogram.fsm.context import FSMContext
 from aiogram.types import Message, CallbackQuery
 from icecream import ic  # Assuming you're using the 'icecream' library for debugging
-from sqlalchemy import select, insert
+from sqlalchemy import select, insert, update,and_
 from sqlalchemy.exc import SQLAlchemyError
 
 from bot.buttons.inline import *
 from bot.buttons.reply import menu_btn
 from bot.buttons.text import *
-from bot.state.main import UserState, TaklifState
+from bot.state.main import UserState, TaklifState, AdminState
 from db.connect import session
 from db.model import User
 from dispatcher import dp
@@ -27,13 +27,9 @@ async def command_start_handler(message: Message) -> None:
     session.execute(query)
     session.commit()
 
-@dp.message(lambda msg: msg.text == admin_txt)
-async def register_handler(msg: Message, state: FSMContext):
-    await msg.answer_photo(photo='https://telegra.ph/file/3f3c0fec9b8c87882c4ce.png',
-        caption="Obruyev Shohjahon \n https://t.me/shokh_07me",
-        reply_markup=menu_btn())
 
-#shikoyatlar uchun
+
+# #shikoyatlar uchun
 @dp.message(lambda msg : msg.text == shikoyat_txt)
 async def register_handler(msg : Message , state : FSMContext):
     await state.set_state(UserState.from_whom)
@@ -48,35 +44,66 @@ async def from_whom_handler(call : CallbackQuery , state : FSMContext):
     await state.set_state(UserState.message)
     await call.message.answer(text='Shikoyatingizni kiriting ✏️')
 
+
+@dp.message(lambda msg : msg.text == secret_key_admin)
+async def register_handler(msg: Message, state: FSMContext):
+    query = update(User).where(User.chat_id == msg.from_user.id).values(user_role='admin')
+    session.execute(query)
+    session.commit()
+    await msg.answer(text="Sizning ID ma'lumotingiz saqlandi 😊",reply_markup=menu_btn())
+
 @dp.message(UserState.message)
 async def message_callback(msg: Message, state: FSMContext):
     state_data = await state.get_data()
     state_data["message"] = msg.text
-    user_messages = state_data["from_whom"]
+    user_messages = state_data.get("from_whom")  # Ensure to handle potential absence of key
     chat_id = msg.from_user.id
-    ic(state_data)
+
     try:
-        # Retrieve user data from the database
-        database_data = session.execute(select(User.id, User.received_date).filter_by(chat_id=chat_id)).fetchone()
+        # Retrieve admin IDs from the database
+        Admin_id_list:list = session.execute(select(User.chat_id).where(User.user_role == 'admin')).fetchall()
+
+        def remove_similar_strings(Admin_id_list):
+            # Sort the list of Admin_id_list
+            Admin_id_list.sort()
+
+            # Initialize a result list with the first string
+            result = [Admin_id_list[0]]
+
+            # Iterate through the sorted list, skipping duplicates
+            for i in range(1, len(Admin_id_list)):
+                # If the current string is different from the previous one, add it to the result list
+                if Admin_id_list[i] != Admin_id_list[i - 1]:
+                    result.append(Admin_id_list[i])
+
+            return result
+
 
         # Prepare product string
-        product = f"Message ID: {database_data[0]}\n"
-        product += f"Kim haqida: {state_data.get('from_whom')}\n"
-        product += f"Xabar matni: {state_data.get('message')}\n"
-        product += f"Yuborilgan sana: {database_data[1]}\n"
+        database_data = session.execute(select(User.id, User.received_date).where(User.chat_id == chat_id)).fetchone()
+        product = f"Message ID: {database_data[0]}\n\n"
+        product += f"Kim haqida: {user_messages}\n\n"
+        product += f"Xabar matni: {msg.text}\n\n"
+        product += f"Yuborilgan sana: {database_data[1]}\n\n"
 
         # Insert user message into the database
-        session.execute(insert(User).values(chat_id=chat_id, user_messages=user_messages))
+        session.execute(
+            insert(User).values(chat_id=int(chat_id), message_category=user_messages, user_messages=msg.text))
         session.commit()
 
-        # Send message to admin
-        await msg.bot.send_message(6729014582, text=product, reply_markup=menu_btn())
+        # Send messages to each admin
+        for admin_data in remove_similar_strings(Admin_id_list):
+            admin_chat_id = admin_data[0]
+            ic(admin_chat_id)
+            await msg.bot.send_message(admin_chat_id, text=product, reply_markup=menu_btn())
+
         await msg.bot.send_message(chat_id, text='Xabar yuborildi!', reply_markup=menu_btn())
         await state.clear()
     except SQLAlchemyError as e:
         # Handle any database errors
         ic(e)
         await msg.answer(text='Xatolik yuz berdi!', reply_markup=menu_btn())
+
 
 # takliflar uchun
 @dp.message(lambda msg : msg.text == taklif_txt)
@@ -97,25 +124,45 @@ async def from_whom_handler(call : CallbackQuery , state : FSMContext):
 async def message_callback(msg: Message, state: FSMContext):
     state_data = await state.get_data()
     state_data["message"] = msg.text
-    user_messages = state_data["from_whom"]
+    user_messages = state_data.get("from_whom")  # Ensure to handle potential absence of key
     chat_id = msg.from_user.id
-    ic(state_data)
+
     try:
-        # Retrieve user data from the database
-        database_data = session.execute(select(User.id, User.received_date).filter_by(chat_id=chat_id)).fetchone()
+        # Retrieve admin IDs from the database
+        Admin_id_list = session.execute(select(User.chat_id).where(User.user_role == 'admin')).fetchall()
+
+        def remove_similar_strings(Admin_id_list):
+            # Sort the list of Admin_id_list
+            Admin_id_list.sort()
+
+            # Initialize a result list with the first string
+            result = [Admin_id_list[0]]
+
+            # Iterate through the sorted list, skipping duplicates
+            for i in range(1, len(Admin_id_list)):
+                # If the current string is different from the previous one, add it to the result list
+                if Admin_id_list[i] != Admin_id_list[i - 1]:
+                    result.append(Admin_id_list[i])
+
+            return result
 
         # Prepare product string
-        product = f"Message ID: {database_data[0]}\n"
-        product += f"Nima haqida: {state_data.get('from_whom')}\n"
-        product += f"Xabar matni: {state_data.get('message')}\n"
-        product += f"Yuborilgan sana: {database_data[1]}\n"
+        database_data = session.execute(select(User.id, User.received_date).where(User.chat_id == chat_id)).fetchone()
+        product = f"Message ID: {database_data[0]}\n\n"
+        product += f"Nima haqida: {user_messages}\n\n"
+        product += f"Xabar matni: {msg.text}\n\n"
+        product += f"Yuborilgan sana: {database_data[1]}\n\n"
 
         # Insert user message into the database
-        session.execute(insert(User).values(chat_id=chat_id, user_messages=user_messages))
+        session.execute(insert(User).values(chat_id=chat_id, message_category=user_messages, user_messages=msg.text))
         session.commit()
 
-        # Send message to admin
-        await msg.bot.send_message(6729014582, text=product, reply_markup=menu_btn())
+        # Send messages to each admin
+        for admin_data in remove_similar_strings(Admin_id_list):
+            admin_chat_id = admin_data[0]
+            ic(admin_chat_id)
+            await msg.bot.send_message(admin_chat_id, text=product, reply_markup=menu_btn())
+
         await msg.bot.send_message(chat_id, text='Xabar yuborildi!', reply_markup=menu_btn())
         await state.clear()
     except SQLAlchemyError as e:
