@@ -6,10 +6,10 @@ services:
     build: .
     #image shokhmee/exam_p18_shohjahon
     restart: always
-    container_name: exam_shohjahon
+    container_name: Edu_zone_anonim
     environment:
       BOT_TOKEN: 6984156715:AAHG0DFt-HzYVaqQqBSU5kmgeLz0aQ_byf0
-      DB_NAME: course
+      DB_NAME: postgres
       DB_PASSWORD: 1
       DB_HOST: pg
       DB_USER: postgres
@@ -22,7 +22,7 @@ services:
   pg:
     image: postgres:alpine
     restart: always
-    container_name: contine_shohjahon
+    container_name: contine_Edu_Zone_anonim
     environment:
       POSTGRES_PASSWORD: 1
     ports:
