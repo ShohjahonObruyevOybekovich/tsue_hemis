@@ -6,7 +6,7 @@ from bot.buttons.text import *
 def menu_btn():
     k1 = KeyboardButton(text = dars_jadvali_txt)
     k2 = KeyboardButton(text = talaba_info_txt)
-    k3 = KeyboardButton(text = davomad_txt)
+    k3 = KeyboardButton(text = baholar_txt)
     k4 = KeyboardButton(text=admin)
     design = [
         [k1 , k2],

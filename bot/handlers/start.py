@@ -114,7 +114,7 @@ async def handle_password(msg: Message, state: FSMContext):
 
 
 #davomat
-@dp.message(lambda msg: msg.text == davomad_txt)
+@dp.message(lambda msg: msg.text == baholar_txt)
 async def register_handler(msg: Message, state: FSMContext):
     await msg.answer("Semestrni tanlang:", reply_markup=semestr())
     await state.set_state(JadvalState.semestr)
