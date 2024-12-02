@@ -1,25 +1,19 @@
-import logging
 import urllib
-from asyncio import timeout
 from collections import defaultdict
-from datetime import datetime
-from select import select
+
+import urllib
+from collections import defaultdict
 
 import requests
-from aiogram import types
-from aiogram.client.session import aiohttp
-from aiogram.enums import ParseMode
 from aiogram.filters import CommandStart
 from aiogram.fsm.context import FSMContext
 from aiogram.types import Message, CallbackQuery
 from aiohttp import ClientSession
-from alembic.util import status
 from icecream import ic  # Assuming you're using the 'icecream' library for debugging
-from sqlalchemy import select, insert, update,and_
-from sqlalchemy.exc import SQLAlchemyError
+from sqlalchemy import insert, update
 
 from bot.buttons.inline import *
-from bot.buttons.reply import menu_btn, Login, admin_btn
+from bot.buttons.reply import menu_btn, Login
 from bot.buttons.text import *
 from bot.state.main import UserState, JadvalState
 from db.connect import session
