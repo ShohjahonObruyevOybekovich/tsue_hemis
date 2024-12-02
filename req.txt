@@ -8,6 +8,7 @@ asttokens==2.4.1
 async-timeout==4.0.3
 attrs==23.2.0
 certifi==2023.11.17
+charset-normalizer==3.4.0
 colorama==0.4.6
 exceptiongroup==1.2.0
 executing==2.0.1
@@ -28,8 +29,10 @@ pydantic_core==2.14.6
 Pygments==2.17.2
 pytest==8.0.0
 python-dotenv==1.0.1
+requests==2.32.3
 six==1.16.0
 SQLAlchemy==2.0.25
 tomli==2.0.1
 typing_extensions==4.9.0
+urllib3==2.2.3
 yarl==1.9.4

@@ -1,20 +1,21 @@
 from aiogram.types import InlineKeyboardButton, InlineKeyboardMarkup
 from bot.buttons.text import *
 
-def from_whom_menu():
-    uz_btn = InlineKeyboardButton(text=teachers_txt, callback_data=teachers_txt)
-    en_btn = InlineKeyboardButton(text=Administratsiya_txt, callback_data=Administratsiya_txt)
-    other_btn = InlineKeyboardButton(text=Others_txt, callback_data=Others_txt)
-    return InlineKeyboardMarkup(inline_keyboard=[[uz_btn ],[ en_btn],[other_btn]])
 
+def semestr():
+        first = InlineKeyboardButton(text='1 semestr', callback_data='11')
+        second = InlineKeyboardButton(text='2 semestr', callback_data='12')
+        third = InlineKeyboardButton(text='3 semestr', callback_data='13')
+        fourth = InlineKeyboardButton(text='4 semestr', callback_data='14')
+        fifth = InlineKeyboardButton(text='5 semestr', callback_data='15')
+        sixth = InlineKeyboardButton(text='6 semestr', callback_data='16')
+        seventh = InlineKeyboardButton(text='7 semestr', callback_data='17')
+        eighth = InlineKeyboardButton(text='8 semestr', callback_data='18')
+        design = [
+            [first, second],
+            [third, fourth],
+            [fifth, sixth],
+            [seventh, eighth]
+        ]
+        return InlineKeyboardMarkup(inline_keyboard=design)
 
-def takliflar_from_whom_menu():
-    tashkiliy_btn = InlineKeyboardButton(text=Tashkiliy_txt,callback_data=Tashkiliy_txt)
-    media_btn = InlineKeyboardButton(text=Media_txt, callback_data=Media_txt)
-    other_btn = InlineKeyboardButton(text=Others_txt,callback_data=Others_txt)
-    design = [
-        [tashkiliy_btn],
-        [media_btn],
-        [other_btn]
-    ]
-    return InlineKeyboardMarkup(inline_keyboard=design)

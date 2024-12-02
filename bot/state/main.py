@@ -2,13 +2,11 @@ from aiogram.fsm.state import StatesGroup, State
 
 
 class UserState(StatesGroup):
-    from_whom=State()
-    message=State()
+    Student_login=State()
+    Student_password=State()
 
-class TaklifState(StatesGroup):
-    from_whom=State()
-    message=State()
-
-class AdminState(StatesGroup):
-    Admin_id_list = State()
-
+class JadvalState(StatesGroup):
+    semestr = State()
+    semestr1 = State()
+    fan = State()
+    unm = State()

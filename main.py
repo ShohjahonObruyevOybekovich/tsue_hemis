@@ -9,6 +9,7 @@ from db.model import Base
 from dispatcher import TOKEN, dp
 from bot.handlers import *
 
+
 async def main() -> None:
     bot = Bot(TOKEN, parse_mode=ParseMode.HTML)
     await dp.start_polling(bot)

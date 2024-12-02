@@ -1,10 +1,9 @@
-shikoyat_txt = '📈 Shikoyatlar'
-taklif_txt = '📬Takliflar'
-admin_txt = "Admin 👨‍💻"
-teachers_txt = '👨‍🏫 Ustozlar'
-Administratsiya_txt = '🖥 Administratsiya'
-Others_txt = '💵 Boshqa muammolar'
-Tashkiliy_txt = "🆕 Tashkiliy masalalar bo'yicha"
-Media_txt = "🎭 Media bo'yicha"
-secret_key_admin = 'Edu_Zone_admin'
-filter_user_msg = '⚙️ Filter'
+
+Login_txt = "Login 🖥"
+dars_jadvali_txt = "Dars jadvali 📆"
+admin = "© Dasturchi"
+talaba_info_txt = "Mening malumotlarim 👨‍🎓"
+davomad_txt = "Davomat 📈"
+admin_secret_txt = "tsue_admin"
+admin_shikoyat_list_txt = "Taklif va shikoyatlarni ko'rish"
+admin_back_menu_txt = "Back to main 🔙"

@@ -6,9 +6,9 @@ services:
     build: .
     #image shokhmee/exam_p18_shohjahon
     restart: always
-    container_name: Edu_zone_anonim
+    container_name: tdiu
     environment:
-      BOT_TOKEN: 6984156715:AAHG0DFt-HzYVaqQqBSU5kmgeLz0aQ_byf0
+      BOT_TOKEN: 7653403894:AAGonfagOWxYGrs5cLqOYbwvE0TUAoeAS0U
       DB_NAME: postgres
       DB_PASSWORD: 1
       DB_HOST: pg
@@ -22,7 +22,7 @@ services:
   pg:
     image: postgres:alpine
     restart: always
-    container_name: contine_Edu_Zone_anonim
+    container_name: contine_tdiu
     environment:
       POSTGRES_PASSWORD: 1
     ports:
