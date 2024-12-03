@@ -418,10 +418,15 @@ async def talaba_info(msg: Message, state: FSMContext):
         print(f"Error checking user registration: {e}")
         await msg.answer(text="Iltimos, xatolik yuz berdi. Qayta urinib ko'ring.")
 
-@dp.message(lambda msg : msg.text == admin)
+@dp.message(lambda msg: msg.text == admin)
 async def register_handler(msg: Message, state: FSMContext):
     await msg.answer(
-        text="Bot <b><i>IT klub</i></b> tomonidan ishlab chiqildi\nBot haqida qo'shimcha takliflar uchun dasturchiga murojat qilishingiz mumkin 👉 <a href='https://t.me/shokh_smee'>Dasturchi</a>",
+        text=(
+            "Bot <b><i>IT klub</i></b> tomonidan ishlab chiqildi\n"
+            "Bot haqida qo'shimcha takliflar uchun dasturchiga murojat qilishingiz mumkin 👉 "
+            "<a href='https://t.me/shokh_smee'>Dasturchi</a>\n\n"
+            "Buy me a coffee 👉 <a href='https://buymeacoffee.com/shokh_smee'>Tirikchilik😁</a>"
+        ),
         reply_markup=menu_btn(),
         parse_mode="HTML"
     )
