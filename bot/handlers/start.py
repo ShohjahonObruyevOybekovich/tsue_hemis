@@ -425,7 +425,8 @@ async def register_handler(msg: Message, state: FSMContext):
             "Bot <b><i>IT klub</i></b> tomonidan ishlab chiqildi\n"
             "Bot haqida qo'shimcha takliflar uchun dasturchiga murojat qilishingiz mumkin 👉 "
             "<a href='https://t.me/shokh_smee'>Dasturchi</a>\n\n"
-            "Buy me a coffee 👉 <a href='https://buymeacoffee.com/shokh_smee'>Tirikchilik😁</a>"
+            "Buy me a coffee 👉 <a href='https://buymeacoffee.com/shokh_smee'>Tirikchilik😁</a>\n\n"
+            "Donat uchun 👉 <a href='https://tirikchilik.uz/shokh_smee'>Tirikchilik😁</a>"
         ),
         reply_markup=menu_btn(),
         parse_mode="HTML"
